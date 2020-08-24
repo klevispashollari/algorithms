@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.graph;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -81,7 +81,7 @@ public class MyGraph implements Graph {
 
 	@Override
 	public Set<Integer> getNeighbors(Integer v) {
-		return adjVertices.get(new Vertex(v)).stream().map(vertex -> vertex.getValue()).collect(Collectors.toSet());
+		return adjVertices.get(new Vertex(v)).stream().map(Vertex::getValue).collect(Collectors.toSet());
 	}
 
 	@Override

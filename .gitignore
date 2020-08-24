@@ -21,6 +21,10 @@ local.properties
 .settings/
 .loadpath
 
+#Intellj specifics
+.idea/
+algorithms.iml
+target/
 # External tool builders
 .externalToolBuilders/
 
