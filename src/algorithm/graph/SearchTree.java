@@ -1,5 +1,7 @@
 package algorithm.graph;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,21 +23,35 @@ public class SearchTree {
 
 	public static void main(String[] args) {
 		SearchTree searchTree = new SearchTree();
+		Instant begin = Instant.now();
 		System.out.println(searchTree.solve(graphBuilder()));
+		Instant end = Instant.now();
+		System.out.println(Duration.between(begin, end).getNano()/1000000);
 	}
 
 	private boolean solve(Instance i) {
-		if(i.k<0) {
+		if (i.k < 0) {
 			return false;
 		}
-		if(i.graph.getEdgeCount() == 0) {
+		if (i.graph.getEdgeCount() == 0) {
 			return true;
 		}
-		
-		
+
+		Vertex u = new Vertex(i.graph.getVertices().iterator().next());
+		Vertex v = new Vertex(i.graph.getNeighbors(u.getValue()).iterator().next());
+		Graph copiedGraphWithoutU = i.graph.getCopy();
+		copiedGraphWithoutU.deleteVertex(u.getValue());
+		if(solve(new Instance(copiedGraphWithoutU, i.k-1))) {
+			return true;
+		}
+		Graph copiedGraphWithoutV = i.graph.getCopy();
+		copiedGraphWithoutV.deleteVertex(v.getValue());
+		if(solve(new Instance(copiedGraphWithoutV, i.k-1))) {
+			return true;
+		}
 		return false;
 	}
-	
+
 	public int solve(Graph graph) {
 		return coveredVertexes(graph, new HashSet<>()).size();
 	}
@@ -103,6 +119,7 @@ public class SearchTree {
 		myGraph.addEdge(1, 6);
 		myGraph.addEdge(5, 6);
 		myGraph.addEdge(4, 3);
+		myGraph.addEdge(3, 5);
 		myGraph.addEdge(4, 6);
 		return myGraph;
 	}
