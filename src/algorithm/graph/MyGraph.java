@@ -33,14 +33,8 @@ public class MyGraph implements Graph {
 	@Override
 	public void deleteVertex(Integer v) {
 		Vertex vertex = new Vertex(v);
-		adjVertices.values().stream().forEach(e -> e.remove(vertex));
-		adjVertices.remove(new Vertex(v));
-
-	}
-	@Override
-	public void deleteVertex(Vertex vertex) {
 		adjVertices.values().forEach(e -> e.remove(vertex));
-		adjVertices.remove(vertex);
+		adjVertices.remove(new Vertex(v));
 
 	}
 

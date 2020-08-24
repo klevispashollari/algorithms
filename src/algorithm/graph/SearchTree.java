@@ -21,70 +21,44 @@ public class SearchTree {
 
 	public static void main(String[] args) {
 		SearchTree searchTree = new SearchTree();
-
-
-		Set<Vertex> set = searchTree.coveredVertexes(graphBuilder2(),new HashSet<>());
-		System.out.println(set);
-	}
-	private static MyGraph graphBuilder2(){
-		MyGraph myGraph = new MyGraph();
-		myGraph.addVertex(1);
-		myGraph.addVertex(2);
-		myGraph.addVertex(3);
-		myGraph.addVertex(4);
-		myGraph.addVertex(5);
-		myGraph.addVertex(6);
-		myGraph.addEdge(1,2);
-		myGraph.addEdge(1,3);
-		myGraph.addEdge(1,4);
-		myGraph.addEdge(1,5);
-		myGraph.addEdge(1,6);
-		myGraph.addEdge(5,6);
-		return myGraph;
+		System.out.println(searchTree.solve(graphBuilder()));
 	}
 
-	private static MyGraph graphBuilder1(){
-		MyGraph myGraph = new MyGraph();
-		myGraph.addVertex(1);
-		myGraph.addVertex(2);
-		myGraph.addVertex(3);
-		myGraph.addVertex(4);
-		myGraph.addVertex(5);
-		myGraph.addVertex(6);
-		myGraph.addVertex(7);
-		myGraph.addVertex(8);
-		myGraph.addEdge(1,4);
-		myGraph.addEdge(1,2);
-		myGraph.addEdge(2,3);
-		myGraph.addEdge(2,5);
-		myGraph.addEdge(5,6);
-		myGraph.addEdge(3,6);
-		myGraph.addEdge(3,7);
-		myGraph.addEdge(3,8);
-		return myGraph;
-	}
-
-	public Vertex findMaxDegreeVertex(Graph graph){
-		Map.Entry<Vertex, List<Vertex>> maxEntry = null;
-		for (Map.Entry<Vertex, List<Vertex>> entry : graph.getAdjVertices().entrySet())
-		{
-			if (maxEntry == null || entry.getValue().size() > maxEntry.getValue().size())
-			{
-				maxEntry = entry;
-			}
+	private boolean solve(Instance i) {
+		if(i.k<0) {
+			return false;
 		}
-		return maxEntry.getKey();
+		if(i.graph.getEdgeCount() == 0) {
+			return true;
+		}
+		
+		
+		return false;
+	}
+	
+	public int solve(Graph graph) {
+		return coveredVertexes(graph, new HashSet<>()).size();
 	}
 
-	private Set<Vertex> coveredVertexes(Graph graph,Set<Vertex> vertexSet) {
+	private Set<Vertex> coveredVertexes(Graph graph, Set<Vertex> vertexSet) {
 		if (graph.getEdgeCount() == 0) {
 			return vertexSet;
 		}
 		Vertex maxDegreeVertex = findMaxDegreeVertex(graph);
 		vertexSet.add(maxDegreeVertex);
-		graph.deleteVertex(maxDegreeVertex);
-		coveredVertexes(graph,vertexSet);
+		graph.deleteVertex(maxDegreeVertex.getValue());
+		coveredVertexes(graph, vertexSet);
 		return vertexSet;
+	}
+
+	public Vertex findMaxDegreeVertex(Graph graph) {
+		Map.Entry<Vertex, List<Vertex>> maxEntry = null;
+		for (Map.Entry<Vertex, List<Vertex>> entry : graph.getAdjVertices().entrySet()) {
+			if (maxEntry == null || entry.getValue().size() > maxEntry.getValue().size()) {
+				maxEntry = entry;
+			}
+		}
+		return maxEntry.getKey();
 	}
 
 	public void removeSingletons(Instance i) {
@@ -104,7 +78,7 @@ public class SearchTree {
 			}
 		}
 	}
-	
+
 	public void removeHighDeg(Instance i) {
 		for (Map.Entry<Vertex, List<Vertex>> entry : i.graph.getAdjVertices().entrySet()) {
 			if (i.graph.degree(entry.getKey().getValue()) > i.k) {
@@ -112,5 +86,24 @@ public class SearchTree {
 				i.k--;
 			}
 		}
+	}
+
+	private static MyGraph graphBuilder() {
+		MyGraph myGraph = new MyGraph();
+		myGraph.addVertex(1);
+		myGraph.addVertex(2);
+		myGraph.addVertex(3);
+		myGraph.addVertex(4);
+		myGraph.addVertex(5);
+		myGraph.addVertex(6);
+		myGraph.addEdge(1, 2);
+		myGraph.addEdge(1, 3);
+		myGraph.addEdge(1, 4);
+		myGraph.addEdge(1, 5);
+		myGraph.addEdge(1, 6);
+		myGraph.addEdge(5, 6);
+		myGraph.addEdge(4, 3);
+		myGraph.addEdge(4, 6);
+		return myGraph;
 	}
 }

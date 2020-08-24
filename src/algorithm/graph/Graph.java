@@ -28,7 +28,6 @@ public interface Graph {
      */
     public void deleteVertex (Integer v);
 
-    public void deleteVertex(Vertex vertex);
     
     /**
      * Delets an edge from the graph
