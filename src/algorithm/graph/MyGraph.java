@@ -37,6 +37,12 @@ public class MyGraph implements Graph {
 		adjVertices.remove(new Vertex(v));
 
 	}
+	@Override
+	public void deleteVertex(Vertex vertex) {
+		adjVertices.values().forEach(e -> e.remove(vertex));
+		adjVertices.remove(vertex);
+
+	}
 
 	@Override
 	public void deleteEdge(Integer u, Integer v) {
@@ -124,6 +130,7 @@ public class MyGraph implements Graph {
 		}
 	}
 
+	@Override
 	public void printGraph() {
 		for (Map.Entry<Vertex, List<Vertex>> entry : adjVertices.entrySet()) {
 			System.out.println(entry.getKey().getValue() + " -->");

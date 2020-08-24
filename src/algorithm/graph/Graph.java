@@ -1,5 +1,7 @@
 package algorithm.graph;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 /**
  * The interface represents the graph methods which have to be implemented.
@@ -25,6 +27,8 @@ public interface Graph {
      * @param v Id of the new added vertex
      */
     public void deleteVertex (Integer v);
+
+    public void deleteVertex(Vertex vertex);
     
     /**
      * Delets an edge from the graph
@@ -85,4 +89,8 @@ public interface Graph {
      * @return Set of the vertices of the graph
      */
     public Set<Integer> getVertices ();
+
+    public Map<Vertex, List<Vertex>> getAdjVertices();
+
+    public void printGraph();
 }
