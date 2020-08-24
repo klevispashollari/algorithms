@@ -136,7 +136,7 @@ public class MyGraph implements Graph {
 	}
 
 	public static void main(String[] args) throws IOException {
-		MyGraph graph = new MyGraph("C:\\Users\\kpashollari\\Desktop\\test.sec");
+		MyGraph graph = new MyGraph("./docs/test.sec");
 		graph.printGraph();
 	}
 
