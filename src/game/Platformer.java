@@ -46,11 +46,17 @@ public class Platformer extends JFrame {
 			levelImg = ImageIO.read(selectedFile);
 
 			this.setBounds(0, 0, levelImg.getWidth() + 16, levelImg.getHeight() + 39);
+			this.setSize(1000, 350);
+			this.setLocationRelativeTo(null);
 			this.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static void main(String[] args) {
+		new Platformer();
 	}
 
 	@Override
