@@ -25,6 +25,7 @@ local.properties
 .idea/
 algorithms.iml
 target/
+out/
 # External tool builders
 .externalToolBuilders/
 
