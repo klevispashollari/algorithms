@@ -6,7 +6,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -16,7 +15,7 @@ public class Platformer extends JFrame {
     private BufferedImage levelImg;
     private int xOffset = 20;
     private int xPos = 0;
-    private int angle = 0;
+    private int camX = 0;
 
     public Platformer() {
         // exit program when window is closed
@@ -84,36 +83,28 @@ public class Platformer extends JFrame {
 
     private void handleRightKeyEvent() {
         System.out.println("right arrow ");
-        angle+=10;
+        camX +=10;
         repaint();
     }
 
     private void handleLeftKeyEvent() {
         System.out.println("left arrow ");
-        angle-=10;
+        camX -=10;
     }
 
 
     class DrawingPanel extends JPanel {
 
-
-        int ovalX = 150;
-        int ovalWidth = 100;
-        int ovalCenterX = ovalX + ovalWidth / 2;
         int recCenterX;
-        int WORLD_SIZE_X = 6000;
-        int camX;
 
         public DrawingPanel() {
-
             ActionListener al = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    recCenterX = (ovalCenterX + angle);
+                    recCenterX = (100 + camX);
                     repaint();
                 }
             };
-
             Timer timer = new Timer(15, al);
             timer.start();
 
@@ -124,12 +115,6 @@ public class Platformer extends JFrame {
             super.paintComponent(g);
             Graphics2D gg = (Graphics2D) g;
             gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            int VIEWPORT_SIZE_X = getWidth();
-            int offsetMaxX = WORLD_SIZE_X - VIEWPORT_SIZE_X;
-            camX = recCenterX - VIEWPORT_SIZE_X / 2;
-            if (camX > offsetMaxX) {
-                camX = offsetMaxX;
-            }
             gg.translate(camX, 0);
             gg.drawImage(levelImg, -300, 20, null);
         }
