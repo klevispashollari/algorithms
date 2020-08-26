@@ -101,6 +101,8 @@ public class Level extends JFrame {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            }finally {
+                g.dispose();
             }
         }
     }
@@ -116,7 +118,7 @@ public class Level extends JFrame {
             Graphics2D gg = (Graphics2D) g;
             super.paintComponent(gg);
             gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            gg.translate(camX, 0);
+            gg.translate(-camX, 0);
         }
 
     }
