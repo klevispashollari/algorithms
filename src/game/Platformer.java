@@ -15,6 +15,8 @@ public class Platformer extends JFrame implements ActionListener {
     public static final String BasePath = "./docs/Step3/assets/";
     private static final long serialVersionUID = 5736902251450559962L;
 
+    private int ticks;
+    private int yMotion;
     private Player p = null;
     private Level l = null;
     BufferStrategy bufferStrategy;
@@ -107,11 +109,27 @@ public class Platformer extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+
+        if(!checkCollision()){
+            updateGravity();
+        }
         updateGameStateAndRepaint();
-        checkCollision();
+
     }
 
-    public void checkCollision(){
+    private void updateGravity(){
+        ticks++;
+        if(ticks%2==0 && yMotion<15){
+            yMotion+=1;
+        }
+        getPlayer().move(0,yMotion);
+    }
+
+    private void jump(){
+
+    }
+
+    public Boolean checkCollision(){
 
         ///System.out.println(l.levelImg.getWidth()+" : "+l.levelImg.getHeight());
         for (Tile tile : l.tiles){
@@ -137,8 +155,10 @@ public class Platformer extends JFrame implements ActionListener {
                 if(vec2.x <0 && vec2.y<0){
                    System.out.println("above");
                 }
+                return Boolean.TRUE;
             }
         }
+        return Boolean.FALSE;
     }
 
     public class AL extends KeyAdapter {
@@ -159,11 +179,16 @@ public class Platformer extends JFrame implements ActionListener {
             }
 
             if (keyCode == KeyEvent.VK_UP) {
-                player.move(0, -1);
+                if(yMotion>0) {
+                   yMotion=0;
+                }else {
+                    yMotion-=10;
+                    player.move(0,yMotion);
+                }
             }
 
             if (keyCode == KeyEvent.VK_DOWN) {
-                player.move(0, 1);
+                    player.move(0, 1);
             }
 
             if (keyCode == KeyEvent.VK_LEFT) {
@@ -171,7 +196,7 @@ public class Platformer extends JFrame implements ActionListener {
             }
 
             if (keyCode == KeyEvent.VK_RIGHT) {
-                player.move(1, 0);
+                player.move(5, 0);
             }
 
             if (keyCode == KeyEvent.VK_R) {
