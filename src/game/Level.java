@@ -26,7 +26,7 @@ public class Level extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new Level("C:\\Users\\kpashollari\\Desktop\\grassMid.png", "C:\\Users\\kpashollari\\Desktop\\level1.bmp", "C:\\Users\\kpashollari\\Desktop\\liquidWaterTop_mid.png");
+		new Level("./docs/Step1/assets/Tiles/grassMid.png", "./docs/Step1/level1.bmp", "./docs/Step1/assets/Tiles/liquidWaterTop_mid.png");
 	}
 
 	@Override
