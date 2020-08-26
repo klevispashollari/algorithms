@@ -1,24 +1,28 @@
 package game;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 public class Platformer extends JFrame {
+    public static final String BasePath = ".\\assets\\";
     private static final long serialVersionUID = 5736902251450559962L;
 
-    private BufferedImage levelImg;
-    private int xOffset = 20;
-    private int xPos = 0;
-    private int camX = 0;
+    private Player p = null;
+    private Level l = null;
+    BufferStrategy bufferStrategy;
 
     public Platformer() {
-        // exit program when window is closed
+        //exit program when window is closed
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
@@ -27,11 +31,15 @@ public class Platformer extends JFrame {
 
         JFileChooser fc = new JFileChooser();
         fc.setCurrentDirectory(new File("./"));
-        fc.setDialogTitle("Please input image (.bmp)");
-        FileFilter filter = new FileNameExtensionFilter("image", "bmp");
+        fc.setDialogTitle("Please select level input image (.bmp)");
+        FileFilter filter = new FileNameExtensionFilter("Level image", "bmp");
         fc.setFileFilter(filter);
         int result = fc.showOpenDialog(this);
         File selectedFile = new File("");
+        addKeyListener(new AL(this));
+        createBufferStrategy(2);
+        bufferStrategy = this.getBufferStrategy();
+
 
         if (result == JFileChooser.APPROVE_OPTION) {
             selectedFile = fc.getSelectedFile();
@@ -42,82 +50,99 @@ public class Platformer extends JFrame {
         }
 
         try {
-            levelImg = ImageIO.read(selectedFile);
+            l = new Level(selectedFile.getAbsolutePath());
+            p = new Player(l);
+            l.player = p;
 
-            this.setBounds(800, 1000, levelImg.getWidth() + 1000, levelImg.getHeight() + 39);
-            this.setSize(150, 350);
-            this.setLocationRelativeTo(null);
+            this.setBounds(0, 0, 1000, 12 * 70);
             this.setVisible(true);
-            this.setContentPane(new DrawingPanel());
-            addKeyAdapter(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public static void main(String[] args) {
-        new Platformer();
+    private void restart() throws IOException {
+        p.pos.x = 0;
+        p.pos.y = 0;
+        l.offsetX = 0;
+        l.initLevel();
     }
 
-    public void addKeyAdapter(JFrame frame) {
-        frame.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent keyEvent) {
-                handleKeyPressedEvent(keyEvent);
-            }
-        });
-    }
-
-    public void handleKeyPressedEvent(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        switch (keyCode) {
-            case KeyEvent.VK_LEFT:
-                handleLeftKeyEvent();
-                break;
-            case KeyEvent.VK_RIGHT:
-                handleRightKeyEvent();
-                break;
-        }
-    }
-
-    private void handleRightKeyEvent() {
-        System.out.println("right arrow ");
-        camX +=10;
+    private void updateGameStateAndRepaint() {
+        l.update();
         repaint();
     }
 
-    private void handleLeftKeyEvent() {
-        System.out.println("left arrow ");
-        camX -=10;
+    @Override
+    public void paint(Graphics g) {
+        Graphics2D g2 = null;
+
+        try {
+            g2 = (Graphics2D) bufferStrategy.getDrawGraphics();
+            draw(g2);
+
+        } finally {
+            g2.dispose();
+        }
+        bufferStrategy.show();
     }
 
+    private void draw(Graphics2D g2d) {
+        BufferedImage level = (BufferedImage) l.getResultingImage();
+        if (l.offsetX > level.getWidth() - 1000)
+            l.offsetX = level.getWidth() - 1000;
+        BufferedImage bi = level.getSubimage((int) l.offsetX, 0, 1000, level.getHeight());
+        g2d.drawImage(bi, 0, 0, this);
+        g2d.drawImage(getPlayer().getPlayerImage(), (int) (getPlayer().pos.x - l.offsetX), (int) getPlayer().pos.y, this);
+    }
 
-    class DrawingPanel extends JPanel {
+    public Player getPlayer() {
+        return this.p;
+    }
 
-        int recCenterX;
+    public class AL extends KeyAdapter {
+        Platformer p;
 
-        public DrawingPanel() {
-            ActionListener al = new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    recCenterX = (100 + camX);
-                    repaint();
-                }
-            };
-            Timer timer = new Timer(15, al);
-            timer.start();
-
+        public AL(Platformer p) {
+            super();
+            this.p = p;
         }
 
         @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            Graphics2D gg = (Graphics2D) g;
-            gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            gg.translate(camX, 0);
-            gg.drawImage(levelImg, -300, 20, null);
-        }
+        public void keyPressed(KeyEvent event) {
+            int keyCode = event.getKeyCode();
+            Player player = p.getPlayer();
 
+            if (keyCode == KeyEvent.VK_ESCAPE) {
+                dispose();
+            }
+
+            if (keyCode == KeyEvent.VK_UP) {
+                player.move(0, -1);
+            }
+
+            if (keyCode == KeyEvent.VK_DOWN) {
+                player.move(0, 1);
+            }
+
+            if (keyCode == KeyEvent.VK_LEFT) {
+                player.move(-1, 0);
+            }
+
+            if (keyCode == KeyEvent.VK_RIGHT) {
+                player.move(1, 0);
+            }
+
+            if (keyCode == KeyEvent.VK_R) {
+                try {
+                    restart();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            updateGameStateAndRepaint();
+        }
     }
 }
