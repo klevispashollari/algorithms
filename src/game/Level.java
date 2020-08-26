@@ -32,21 +32,22 @@ public class Level extends JFrame {
 	@Override
 	public void paint(Graphics graphics) {
 		Graphics2D g2D = (Graphics2D) graphics;
-		g2D.setBackground(Color.BLACK);
 		BufferedImage image;
 		BufferedImage seaImage;
 		try {
 			image = ImageIO.read(new File(levelFileName));
 			g2D.drawImage(image, 0, 0, 3500, 350, null);
+            g2D.setColor(Color.BLACK);
+            g2D.fillRect(0,0,3500,350);
 			for (int i = 0; i < 70; i++) {
 				image = ImageIO.read(new File(tileFileName));
 				seaImage = ImageIO.read(new File(seaFileName));
 				int index = 0;
 				while(index <= 8) {
 					g2D.drawImage(image, index*70, 210, 70, 70, null);
-					g2D.drawImage(image, (index+7)*70, 140, 70, 70, null);
+					g2D.drawImage(image, (index+8)*70, 140, 70, 70, null);
 					g2D.drawImage(image, 17*70, 70, 70, 70, null);
-					g2D.drawImage(image, 16*70, 70, 70, 70, null);
+					g2D.drawImage(image, 18*70, 70, 70, 70, null);
 					g2D.drawImage(seaImage, index*70, 280, 70, 70, null);
 					index++;
 				}
