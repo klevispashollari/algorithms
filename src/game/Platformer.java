@@ -5,17 +5,18 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Platformer extends JFrame {
     private static final long serialVersionUID = 5736902251450559962L;
 
-    BufferedImage levelImg;
+    private BufferedImage levelImg;
+    private int xOffset = 20;
+    private int xPos = 0;
+    private int angle = 0;
 
     public Platformer() {
         // exit program when window is closed
@@ -44,10 +45,11 @@ public class Platformer extends JFrame {
         try {
             levelImg = ImageIO.read(selectedFile);
 
-            this.setBounds(0, 0, levelImg.getWidth() + 16, levelImg.getHeight() + 39);
-            this.setSize(1000, 350);
+            this.setBounds(800, 1000, levelImg.getWidth() + 1000, levelImg.getHeight() + 39);
+            this.setSize(150, 350);
             this.setLocationRelativeTo(null);
             this.setVisible(true);
+            this.setContentPane(new DrawingPanel());
             addKeyAdapter(this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,12 +59,6 @@ public class Platformer extends JFrame {
 
     public static void main(String[] args) {
         new Platformer();
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(levelImg, 8, 31, this);
     }
 
     public void addKeyAdapter(JFrame frame) {
@@ -88,11 +84,55 @@ public class Platformer extends JFrame {
 
     private void handleRightKeyEvent() {
         System.out.println("right arrow ");
+        angle+=10;
+        repaint();
     }
 
     private void handleLeftKeyEvent() {
         System.out.println("left arrow ");
+        angle-=10;
     }
 
 
+    class DrawingPanel extends JPanel {
+
+
+        int ovalX = 150;
+        int ovalWidth = 100;
+        int ovalCenterX = ovalX + ovalWidth / 2;
+        int recCenterX;
+        int WORLD_SIZE_X = 6000;
+        int camX;
+
+        public DrawingPanel() {
+
+            ActionListener al = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    recCenterX = (ovalCenterX + angle);
+                    repaint();
+                }
+            };
+
+            Timer timer = new Timer(15, al);
+            timer.start();
+
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D gg = (Graphics2D) g;
+            gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            int VIEWPORT_SIZE_X = getWidth();
+            int offsetMaxX = WORLD_SIZE_X - VIEWPORT_SIZE_X;
+            camX = recCenterX - VIEWPORT_SIZE_X / 2;
+            if (camX > offsetMaxX) {
+                camX = offsetMaxX;
+            }
+            gg.translate(camX, 0);
+            gg.drawImage(levelImg, -300, 20, null);
+        }
+
+    }
 }
