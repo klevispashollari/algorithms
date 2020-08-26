@@ -26,7 +26,8 @@ public class Level extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new Level("./docs/Step1/assets/Tiles/grassMid.png", "./docs/Step1/level1.bmp", "./docs/Step1/assets/Tiles/liquidWaterTop_mid.png");
+		new Level("./docs/Step1/assets/Tiles/grassMid.png", "./docs/Step1/level1.bmp",
+				"./docs/Step1/assets/Tiles/liquidWaterTop_mid.png");
 	}
 
 	@Override
@@ -34,26 +35,21 @@ public class Level extends JFrame {
 		Graphics2D g2D = (Graphics2D) graphics;
 		BufferedImage image;
 		BufferedImage seaImage;
+		BufferedImage tileImage;
 		try {
 			image = ImageIO.read(new File(levelFileName));
 			g2D.drawImage(image, 0, 0, 3500, 350, null);
-            g2D.setColor(Color.BLACK);
-            g2D.fillRect(0,0,3500,350);
-			for (int i = 0; i < 70; i++) {
-				image = ImageIO.read(new File(tileFileName));
-				seaImage = ImageIO.read(new File(seaFileName));
-				int index = 0;
-				while(index <= 8) {
-					g2D.drawImage(image, index*70, 210, 70, 70, null);
-					g2D.drawImage(image, (index+8)*70, 140, 70, 70, null);
-					g2D.drawImage(image, 17*70, 70, 70, 70, null);
-					g2D.drawImage(image, 18*70, 70, 70, 70, null);
-					g2D.drawImage(seaImage, index*70, 280, 70, 70, null);
-					index++;
-				}
-				while(index <=19) {
-					g2D.drawImage(seaImage, index*70, 280, 70, 70, null);
-					index++;
+			tileImage = ImageIO.read(new File(tileFileName));
+			seaImage = ImageIO.read(new File(seaFileName));
+			for(int y = 0; y< image.getHeight(); y++) {
+				for (int x = 0; x < image.getWidth(); x++) {
+					Color color = new Color(image.getRGB(x, y));
+					if(color.equals(Color.BLACK)) {
+						g2D.drawImage(tileImage, x*70, y*70,null);
+					}
+					if(color.equals(Color.BLUE)) {
+						g2D.drawImage(seaImage, x*70, y*70,null);
+					}
 				}
 			}
 		} catch (IOException e) {
