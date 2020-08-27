@@ -9,7 +9,6 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Platformer extends JFrame implements ActionListener {
     public static final String BasePath = "./docs/Step3/assets/";
@@ -17,6 +16,7 @@ public class Platformer extends JFrame implements ActionListener {
 
     private int ticks;
     private int yMotion;
+    boolean inAir = true;
     private Player p = null;
     private Level l = null;
     BufferStrategy bufferStrategy;
@@ -44,7 +44,7 @@ public class Platformer extends JFrame implements ActionListener {
 
     }
 
-    private File fileChooser(){
+    private File fileChooser() {
         JFileChooser fc = new JFileChooser();
         fc.setCurrentDirectory(new File("./"));
         fc.setDialogTitle("Please select level input image (.bmp)");
@@ -77,6 +77,7 @@ public class Platformer extends JFrame implements ActionListener {
 
     private void updateGameStateAndRepaint() {
         l.update();
+        p.update();
         repaint();
     }
 
@@ -109,51 +110,47 @@ public class Platformer extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-
-        if(!checkCollision()){
-            updateGravity();
+        if (!checkCollision()) {
+            p.isInAir = true;
+        }else {
+            p.isInAir=false;
         }
         updateGameStateAndRepaint();
-
     }
 
-    private void updateGravity(){
+    private void updateGravity() {
         ticks++;
-        if(ticks%2==0 && yMotion<15){
-            yMotion+=1;
+        if (ticks % 2 == 0 && yMotion < 15) {
+            yMotion += 1;
         }
-        getPlayer().move(0,yMotion);
+        getPlayer().move(0, yMotion);
     }
 
-    private void jump(){
-
-    }
-
-    public Boolean checkCollision(){
+    public Boolean checkCollision() {
 
         ///System.out.println(l.levelImg.getWidth()+" : "+l.levelImg.getHeight());
-        for (Tile tile : l.tiles){
+        for (Tile tile : l.tiles) {
             //System.out.println(tile.getBoundingBox());
-           //System.out.println("tile "+tile.getPos());
-          //  System.out.println("player "+p.pos);
+            //System.out.println("tile "+tile.getPos());
+            //  System.out.println("player "+p.pos);
             //System.out.println("player "+p.tilesWalk.get(0).getHeight()+" : "+p.tilesWalk.get(0).getWidth());
             //System.out.println("tile "+l.tileImages.get(0).getHeight()+" : "+l.tileImages.get(0).getWidth());
-            BoundingBox pb =p.boundingBox;
-            BoundingBox tb =tile.getBoundingBox();
-            if(pb.intersect(tb)){
+            BoundingBox pb = p.boundingBox;
+            BoundingBox tb = tile.getBoundingBox();
+            if (pb.intersect(tb)) {
                 Vec2 vec2 = pb.overlapSize(tb);
                 System.out.println(vec2);
-                if(vec2.x >0 && vec2.y>0){
+                if (vec2.x > 0 && vec2.y > 0) {
                     System.out.println("below");
                 }
-                if(vec2.x <0 && vec2.y>0){
+                if (vec2.x < 0 && vec2.y > 0) {
                     System.out.println("left");
                 }
-                if(vec2.x >0 && vec2.y<0){
+                if (vec2.x > 0 && vec2.y < 0) {
                     System.out.println("right");
                 }
-                if(vec2.x <0 && vec2.y<0){
-                   System.out.println("above");
+                if (vec2.x < 0 && vec2.y < 0) {
+                    System.out.println("above");
                 }
                 return Boolean.TRUE;
             }
@@ -168,6 +165,20 @@ public class Platformer extends JFrame implements ActionListener {
             super();
             this.p = p;
         }
+        @Override
+        public void keyReleased(KeyEvent event) {
+            int keyCode = event.getKeyCode();
+            Player player = p.getPlayer();
+            if (keyCode == KeyEvent.VK_UP) {
+                player.jumping = false;
+            }
+            if (keyCode == KeyEvent.VK_LEFT ) {
+                player.walkingLeft = false;
+            }
+            if (keyCode == KeyEvent.VK_RIGHT) {
+                player.walkingRight=false;
+            }
+        }
 
         @Override
         public void keyPressed(KeyEvent event) {
@@ -179,26 +190,17 @@ public class Platformer extends JFrame implements ActionListener {
             }
 
             if (keyCode == KeyEvent.VK_UP) {
-                if(yMotion>0) {
-                   yMotion=0;
-                }else {
-                    yMotion-=10;
-                    player.move(0,yMotion);
-                }
+                player.jumping=true;
             }
 
-            if (keyCode == KeyEvent.VK_DOWN) {
-                    player.move(0, 1);
-            }
 
-            if (keyCode == KeyEvent.VK_LEFT) {
-                player.move(-1, 0);
+            if (keyCode == KeyEvent.VK_LEFT ) {
+               player.walkingLeft=true;
             }
 
             if (keyCode == KeyEvent.VK_RIGHT) {
-                player.move(5, 0);
+                 player.walkingRight =true;
             }
-
             if (keyCode == KeyEvent.VK_R) {
                 try {
                     restart();
