@@ -31,26 +31,32 @@ public class GridImpl<E> implements Grid<E> {
 
 	@Override
 	public int getMaxColumnSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		int maxColumnSize = 0;
+		for (List<E> list : grid) {
+			if(list.size() > maxColumnSize) {
+				maxColumnSize = list.size();
+			}
+		}
+		return maxColumnSize;
 	}
 
 	@Override
 	public int getMaxRowSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return grid.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return grid.isEmpty();
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		int size = 0;
+		for (List<E> list : grid) {
+			size = size + list.size();
+		}
+		return size;
 	}
 
 	@Override
