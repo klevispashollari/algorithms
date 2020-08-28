@@ -6,13 +6,23 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class GridImpl<E> implements Grid<E> {
-
-    List<List<E>> grid = new ArrayList<>();
+    private static final Object EMPTY_ELEMENTDATA = new Object();
+    List<List<E>> grid;
 
     @Override
     public Iterator<E> iterator() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public GridImpl(int row,int col) {
+        this.grid = new ArrayList<>(row);
+        for (int i = 0; i < row; i++) {
+            this.grid.add(new ArrayList<>(col));
+            for(int j=0;j<col;j++) {
+                grid.get(i).add((E) EMPTY_ELEMENTDATA);
+            }
+        }
     }
 
     @Override
@@ -174,7 +184,7 @@ public class GridImpl<E> implements Grid<E> {
 }
     
     public static GridImpl<String> getGridI(){
-        GridImpl<String> grid = new GridImpl<String>();
+        GridImpl<String> grid = new GridImpl<String>(3,5);
         List<List<String>> gridData = new ArrayList<>();
         List<String> column = new ArrayList<>();
         column.add("1");

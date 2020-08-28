@@ -3,15 +3,16 @@ package grid;
 
 
 
-import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class GridTestCase {
-	GridImpl<String> grid = new GridImpl<String>();
+	GridImpl<String> grid = new GridImpl<String>(3,4);
 
 
 	public GridImpl<String> getGrid(){
