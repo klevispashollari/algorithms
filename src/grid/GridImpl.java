@@ -6,8 +6,6 @@ import java.util.List;
 
 public class GridImpl<E> implements Grid<E> {
 
-	List<E> gridRows = new ArrayList<>();
-	
 	List<List<E>> grid = new ArrayList<>();
 	
 	@Override
@@ -18,26 +16,12 @@ public class GridImpl<E> implements Grid<E> {
 
 	@Override
 	public void insert(E element, int row, int column) {
-		for (int i = 0 ; i < grid.size(); i++) {
-			for(int j = 0; j < grid.get(i).size(); j++) {
-				if(i == row && j == column) {
-					grid.get(i).add(j, element);
-				}
-			}
-		}
+		grid.get(row).set(column, element);
 	}
 
 	@Override
 	public E remove(int row, int column) {
-		E deletedElement = null;
-		for (int i = 0 ; i < grid.size(); i++) {
-			for(int j = 0; j < grid.get(i).size(); j++) {
-				if(i == row && j == column) {
-					 deletedElement = grid.get(i).remove(j);
-				}
-			}
-		}
-		return deletedElement;
+		return grid.get(row).remove(column);
 	}
 
 	@Override
