@@ -9,34 +9,6 @@ public class GridImpl<E> implements Grid<E> {
 
     List<List<E>> grid = new ArrayList<>();
 
-    public static void main(String[] args) {
-        Iterator<String> i = getGridI().rowIterator();
-        while (i.hasNext()){
-            System.out.println(i.next());
-        }
-
-
-    }
-    public static GridImpl<String> getGridI(){
-        GridImpl<String> grid = new GridImpl<String>();
-        List<List<String>> gridData = new ArrayList<>();
-        List<String> column = new ArrayList<>();
-        column.add("1");
-        column.add("2");
-        column.add("3");
-        column.add("4");
-        List<String> column2 = new ArrayList<>();
-        column2.add("2");
-        column2.add("2");
-        column2.add("2");
-        column2.add("3");
-        gridData.add(column);
-        gridData.add(column2);
-        //gridData.add(column);
-        grid.setGrid(gridData);
-        return grid;
-    }
-
     @Override
     public Iterator<E> iterator() {
         // TODO Auto-generated method stub
