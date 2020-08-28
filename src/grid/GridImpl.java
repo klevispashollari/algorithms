@@ -79,8 +79,7 @@ public class GridImpl<E> implements Grid<E> {
 
     @Override
     public Iterator<E> columnIterator() {
-        // TODO Auto-generated method stub
-        return null;
+    	return new GridImpl.ColumnItr();
     }
 
     public List<List<E>> getGrid() {
@@ -124,5 +123,73 @@ public class GridImpl<E> implements Grid<E> {
         }
 
     }
+    
+    private class ColumnItr implements Iterator<E> {
+        int cursorRow;
+        int col;
 
+        ColumnItr() {
+        	col = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return col != grid.get(0).size() && cursorRow != grid.size();
+        }
+
+        @Override
+        public E next() {
+            int var1 = this.cursorRow;
+            int var2 = this.col;
+
+            if (var1 >= grid.size()) {
+                throw new NoSuchElementException();
+            } else {
+                this.cursorRow = var1 + 1;
+                if(var1 == grid.size()-1){
+                	col++;
+                    cursorRow=0;
+                }
+                return grid.get(var1).get(var2);
+            }
+
+
+        }
+
+    }
+    
+    public static void main(String[] args) {
+        Iterator<String> i = getGridI().rowIterator();
+        Iterator<String> k = getGridI().columnIterator();
+        System.out.println("COLUMN ITERATOR");
+        while (k.hasNext()){
+        System.out.println(k.next());
+        }
+        
+        System.out.println("ROW ITERATOR");
+        while (i.hasNext()){
+            System.out.println(i.next());
+        }
+
+}
+    
+    public static GridImpl<String> getGridI(){
+        GridImpl<String> grid = new GridImpl<String>();
+        List<List<String>> gridData = new ArrayList<>();
+        List<String> column = new ArrayList<>();
+        column.add("1");
+        column.add("2");
+        column.add("3");
+        column.add("4");
+        List<String> column2 = new ArrayList<>();
+        column2.add("2");
+        column2.add("2");
+        column2.add("2");
+        column2.add("3");
+        gridData.add(column);
+        gridData.add(column2);
+        //gridData.add(column);
+        grid.setGrid(gridData);
+        return grid;
+    }
 }
