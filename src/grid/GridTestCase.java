@@ -5,6 +5,7 @@ package grid;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test;
@@ -30,6 +31,31 @@ public class GridTestCase {
 		return grid;
 	}
 
+	
+	@Test
+	public void testRowIterator() {
+		grid = getGrid();
+        Iterator<String> rowIterator = grid.rowIterator();
+		assertEquals("1", rowIterator.next());
+		assertEquals("2", rowIterator.next());
+		assertEquals("3", rowIterator.next());
+		assertEquals("4", rowIterator.next());
+
+	}
+	
+	@Test
+	public void testColumnIterator() {
+		grid = getGrid();
+        Iterator<String> columnIterator = grid.columnIterator();
+		assertEquals("1", columnIterator.next());
+		assertEquals("1", columnIterator.next());
+		assertEquals("1", columnIterator.next());
+		assertEquals("2", columnIterator.next());
+		assertEquals("2", columnIterator.next());
+		assertEquals("2", columnIterator.next());
+
+	}
+	
 	@Test
 	public void testValidCases() {
 		grid = getGrid();
@@ -46,5 +72,6 @@ public class GridTestCase {
 		assertEquals(null, grid.get(4,8));
 		assertEquals(null, grid.remove(4,8));
 	}
+
 }
 

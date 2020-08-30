@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Iterator;
+
 public class GridArrayImplTest {
     static Grid<String> grid;
 
@@ -27,6 +29,28 @@ public class GridArrayImplTest {
         grid.insert("4", 2, 3);
     }
 
+	@Test
+	public void testRowIterator() {
+        Iterator<String> rowIterator = grid.rowIterator();
+		assertEquals("1", rowIterator.next());
+		assertEquals("2", rowIterator.next());
+		assertEquals("3", rowIterator.next());
+		assertEquals("4", rowIterator.next());
+
+	}
+	
+	@Test
+	public void testColumnIterator() {
+        Iterator<String> columnIterator = grid.columnIterator();
+		assertEquals("1", columnIterator.next());
+		assertEquals("1", columnIterator.next());
+		assertEquals("1", columnIterator.next());
+		assertEquals("2", columnIterator.next());
+		assertEquals("2", columnIterator.next());
+		assertEquals("2", columnIterator.next());
+
+	}
+    
     @Test
     public void testValidCases() {
         assertEquals("4", grid.get(2, 3));

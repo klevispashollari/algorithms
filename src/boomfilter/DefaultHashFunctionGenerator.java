@@ -34,6 +34,13 @@ public class DefaultHashFunctionGenerator<T> implements HashFunctionGenerator<T>
 		return element -> (h1.hash(element) + multiplier*h2.hash(element));
 	}
 
+	/**
+	 * Create a collection of HashFunction given the number of hashFunction wanted 
+	 * to be created.
+	 * @param <E>
+	 * @param n
+	 * @return
+	 */
 	public static <E>  Collection<HashFunction<E>> hashFunctions(int n){
 		HashFunctionGenerator<E> hashFunctionGenerator = new DefaultHashFunctionGenerator<>();
 		Collection<HashFunction<E>> functions = new ArrayList<>();

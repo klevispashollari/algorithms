@@ -8,6 +8,7 @@ public class GridArrayImpl<E> implements Grid<E> {
     private static final int DEFAULT_COL = 10;
     private transient Object[][] elements;
     private int size;
+    // nr i elementeve te rreshtit qe kane vlere.
     private int[] colSize;
 
     private void init(int row, int col) {
@@ -193,7 +194,7 @@ public class GridArrayImpl<E> implements Grid<E> {
                 throw new NoSuchElementException();
             } else {
                 this.cursorRow=var1+1;
-                if(var1 == elements[col].length-1){
+                if(cursorRow == elements[col].length-1){
                     col++;
                     cursorRow=0;
                 }
