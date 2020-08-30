@@ -4,7 +4,7 @@ public class ColumnImprint extends BloomFilter<Double> {
     // TODO
 
     public ColumnImprint(int numBits, double min, double max) {
-        super(numBits,null);
+        super(numBits,DefaultHashFunctionGenerator.hashFunctions(2));
     }
 
 

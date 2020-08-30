@@ -19,18 +19,9 @@ public class BloomFilterCollectionTest {
 
     @BeforeClass
     public static void setup(){
-        IBloomFilter<Integer> bloomFilter = new BloomFilter<>(100,hashFunctions(2));
+        IBloomFilter<Integer> bloomFilter = new BloomFilter<>(100,DefaultHashFunctionGenerator.hashFunctions(2));
         bloomFilterCollection = new BloomFilterCollection<>(bloomFilter,new ArrayList<>());
         bloomFilterCollection.addAll(IntStream.rangeClosed(20,50).boxed().collect(Collectors.toList()));
-    }
-
-    private static Collection<HashFunction<Integer>> hashFunctions(int n){
-        HashFunctionGenerator<Integer> hashFunctionGenerator = new DefaultHashFunctionGenerator<>();
-        Collection<HashFunction<Integer>> functions = new ArrayList<>();
-        for (int i = 0; i <n ; i++) {
-            functions.add(hashFunctionGenerator.next());
-        }
-        return functions;
     }
 
     @Test

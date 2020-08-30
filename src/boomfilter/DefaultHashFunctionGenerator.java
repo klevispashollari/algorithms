@@ -1,6 +1,9 @@
 package boomfilter;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * Generates a sequence of hash function as follows:
  * Generate two hash function h(k) and h'(k) with h(k) = p1 * k.hashCode()
@@ -29,6 +32,15 @@ public class DefaultHashFunctionGenerator<T> implements HashFunctionGenerator<T>
 	public HashFunction<T> next() {
 		final int multiplier = j++;
 		return element -> (h1.hash(element) + multiplier*h2.hash(element));
+	}
+
+	public static <E>  Collection<HashFunction<E>> hashFunctions(int n){
+		HashFunctionGenerator<E> hashFunctionGenerator = new DefaultHashFunctionGenerator<>();
+		Collection<HashFunction<E>> functions = new ArrayList<>();
+		for (int i = 0; i <n ; i++) {
+			functions.add(hashFunctionGenerator.next());
+		}
+		return functions;
 	}
 
 }
