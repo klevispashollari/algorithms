@@ -1,4 +1,4 @@
-package grid;
+package boomfilter;
 
 /**
  * A default implementation of the {@link HashFunction} interface.

@@ -1,4 +1,4 @@
-package grid;
+package boomfilter;
 
 /**
  * This interface represents a factory for {@link HashFunction hash functions}.

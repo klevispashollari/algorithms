@@ -1,4 +1,4 @@
-package grid;
+package boomfilter;
 
 /**
  * This interface represents a generic hash function.
