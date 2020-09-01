@@ -2,6 +2,10 @@ package image;
 
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class ImageProcessing {
 
@@ -45,9 +49,10 @@ public class ImageProcessing {
 		return null;
 	}
 
-	public static void main(String[] args) {
-
-		// TODO
+	public static void main(String[] args) throws IOException {
+		String fileName = "./docs/Step1/assets/Tiles/grassMid.png";
+		BufferedImage immage = ImageIO.read(new File(fileName));
+		System.out.println(immage.getRGB(0, 0));
 
 	}
 
