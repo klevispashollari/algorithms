@@ -1,6 +1,6 @@
 package image;
 
-
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,10 +16,19 @@ public class ImageProcessing {
 	 * @return A 2-D array with intensities
 	 */
 	private static int[][] convertToGrayScaleArray(BufferedImage img) {
-		
-		// TODO
-		
-		return null;
+		int[][] pixels = new int[img.getHeight()][img.getWidth()];
+
+		for (int i = 0; i < img.getHeight(); i++) {
+			for (int j = 0; j < img.getWidth(); j++) {
+				Color color = new Color(img.getRGB(i, j));
+				int red = color.getRed();
+				int green = color.getGreen();
+				int blue = color.getBlue();
+				pixels[i][j] = (int) (0.299*red + 0.587*green + 0.144*blue);
+			}
+		}
+
+		return pixels;
 	}
 
 	/**
@@ -29,9 +38,9 @@ public class ImageProcessing {
 	 * @return BufferedImage
 	 */
 	private static BufferedImage convertToBufferedImage(int[][] img) {
-		
+
 		// TODO
-		
+
 		return null;
 	}
 
