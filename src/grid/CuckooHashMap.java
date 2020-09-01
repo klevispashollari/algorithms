@@ -15,10 +15,10 @@ import boomfilter.HashFunctionGenerator;
  */
 public class CuckooHashMap<Key, Value> implements Iterable<Pair> {
     int numberOfTables;
-    private final HashFunction<Key>[] hashingArray = new HashFunction[numberOfTables];
+    private final HashFunction<Key>[] hashingArray ;
     int numberBuckets;
     HashFunctionGenerator<Key> hashFunctionGenerator;
-    private Pair<Key, Value>[][] hashMap = new Pair[numberOfTables][numberBuckets]; //[0][h0(x)] ???
+    private Pair<Key, Value>[][] hashMap ; //[0][h0(x)] ???
     /**
      * Creates a new instance
      * @param gen        The hash function generator
@@ -29,7 +29,11 @@ public class CuckooHashMap<Key, Value> implements Iterable<Pair> {
         this.hashFunctionGenerator = gen;
         this.numberOfTables = k;
         this.numberBuckets = numBuckets;
-        //TODO
+        this.hashingArray  = new HashFunction[numberOfTables];
+        this.hashMap = new Pair[numberOfTables][numberBuckets];
+        for(int i = 0; i < hashingArray.length; i++) {
+        	hashingArray[i] = hashFunctionGenerator.next();
+        }
     }
     /**
      * Inserts the given key-value pair into this index. If the key
@@ -156,5 +160,16 @@ public class CuckooHashMap<Key, Value> implements Iterable<Pair> {
             }
         }
     }
+
+	public Pair<Key, Value>[][] getHashMap() {
+		return hashMap;
+	}
+	public void setHashMap(Pair<Key, Value>[][] hashMap) {
+		this.hashMap = hashMap;
+	}
+	public HashFunction<Key>[] getHashingArray() {
+		return hashingArray;
+	}
+
 }
 
