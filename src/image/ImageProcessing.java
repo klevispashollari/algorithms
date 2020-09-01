@@ -47,7 +47,9 @@ public class ImageProcessing {
 		for(int i=0; i<img.length; i++) {
 			for(int j=0; j<img[i].length; j++) {
 				int a = img[i][j];
-				Color newColor = new Color(a,a,a);
+				int p1 = a << 8;
+				int p2 = p1 >>> 8;
+				Color newColor = new Color(p2,p2,p2);
 				bufferedImage.setRGB(j,i,newColor.getRGB());
 			}
 		}
@@ -78,18 +80,8 @@ public class ImageProcessing {
 	public static void main(String[] args) throws IOException {
 
 		BufferedImage image = ImageIO.read(new File(INPUT_IMAGE));
-		int mask = (1 << 24) - 1;
-		int p = image.getRGB(0, 0) ;
-		//System.out.println(Integer.toBinaryString(p));
-		int p1 = p >>> 24;
-		int p3 = p1 << 24;
-		int p4 = p1^p3;
-        int p2 = p & p3;
-		System.out.println(Integer.toBinaryString(p3));
-		System.out.println(Integer.toBinaryString(p4&mask));
-		System.out.println(Integer.toBinaryString(p1));
-		System.out.println(Integer.toBinaryString(~p2));
-		//convertToBufferedImage(convertToGrayScaleArray(image));
+		System.out.println(image.getRGB(0,0));
+		convertToBufferedImage(convertToGrayScaleArray(image));
 
 	}
 
