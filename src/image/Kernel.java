@@ -46,6 +46,10 @@ public class Kernel {
 		return null;
 	}
 
+	public double[][] getK() {
+		return k;
+	}
+
 	public int getHeight() {
 		return height;
 	}

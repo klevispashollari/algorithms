@@ -2,6 +2,7 @@ package image;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.awt.image.ConvolveOp;
 import java.io.File;
 import java.io.IOException;
 
@@ -9,8 +10,9 @@ import javax.imageio.ImageIO;
 
 public class ImageProcessing {
 
-	private static final String OUTPUT_GREY_IMAGE = "./docs/images/GrayScale.jpg";
-	private static final String INPUT_IMAGE = "./docs/Step1/assets/Tiles/grassMid.png";
+	private static final String OUTPUT_GREY_IMAGE = "./docs/images/GrayScale.png";
+	private static final String OUTPUT_FILTERED_IMAGE = "./docs/images/filtered.png";
+	private static final String INPUT_IMAGE = "./docs/Step1/assets/Tiles/box.png";
 
 	/**
 	 * Converts the input RGB image to a single-channel gray scale array.
@@ -58,6 +60,7 @@ public class ImageProcessing {
 			ImageIO.write(bufferedImage, "jpg", output);
 		}catch (IOException e){
 			System.out.println(e.getMessage());
+			throw new RuntimeException(e.getCause());
 		}
 
 		return bufferedImage;
@@ -70,11 +73,52 @@ public class ImageProcessing {
 	 * @param kernel
 	 * @return convolved gray-scale image
 	 */
-	private static BufferedImage filter(BufferedImage img, Kernel kernel) {
+	private static BufferedImage filter(BufferedImage img, Kernel kernel) throws IOException {
+		int width = img.getWidth();
+		int height = img.getHeight();
+		int kLength = kernel.getWidth();
+		double[][] kMatrix = kernel.getK();
+		double multiFactor = 1.0;
+		BufferedImage output = new BufferedImage(width, height, img.getType());
+		if (img == null) {
+			throw new NullPointerException("src image is null");
+		}
+		for(int x=0;x<width;x++)
+		{
+			for(int y=0;y<height;y++)
+			{
+				float red=0f,green=0f,blue=0f;
+				for(int i=0;i<kLength;i++)
+				{
+					for(int j=0;j<kLength;j++)
+					{
+						// Calculating X and Y coordinates of the pixel to be multiplied with current kernel element
+						// In case of edges of image the '% WIDTH' wraps the image and the pixel from opposite edge is used
+						int imageX = (x - kLength / 2 + i + width) % width;
+						int imageY = (y - kLength / 2 + j + height) % height;
 
-		// TODO
+						int RGB = img.getRGB(imageX,imageY);
+						int R = (RGB >> 16) & 0xff; // Red Value
+						int G = (RGB >> 8) & 0xff;	// Green Value
+						int B = (RGB) & 0xff;		// Blue Value
 
-		return null;
+						// The RGB is multiplied with current kernel element and added on to the variables red, blue and green
+						red += (R*kMatrix[i][j]);
+						green += (G*kMatrix[i][j]);
+						blue += (B*kMatrix[i][j]);
+					}
+				}
+				int outR, outG, outB;
+				// The value is truncated to 0 and 255 if it goes beyond
+				outR = Math.min(Math.max((int)(red*multiFactor),0),255);
+				outG = Math.min(Math.max((int)(green*multiFactor),0),255);
+				outB = Math.min(Math.max((int)(blue*multiFactor),0),255);
+				// Pixel is written to output image
+				output.setRGB(x,y,new Color(outR,outG,outB).getRGB());
+			}
+		}
+		ImageIO.write(output,"PNG",new File(OUTPUT_FILTERED_IMAGE));
+		return output;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -82,7 +126,7 @@ public class ImageProcessing {
 		BufferedImage image = ImageIO.read(new File(INPUT_IMAGE));
 		System.out.println(image.getRGB(0,0));
 		convertToBufferedImage(convertToGrayScaleArray(image));
+		BufferedImage imageFiltered =  filter(image,Kernels.EdgeDetection());
 
 	}
-
 }
