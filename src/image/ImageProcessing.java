@@ -118,7 +118,7 @@ public class ImageProcessing {
 	}
 
 	public static void main(String[] args) throws IOException {
-		double[][] k = new double[][]{{0, 0, 1}, {0, 1, 0}, {1, 0, 0}};
+		double[][] k = new double[][]{{1, 0, 1}, {1, 1, 0}, {0, 1, 1}};
 		BufferedImage image = ImageIO.read(new File(INPUT_IMAGE));
 		System.out.println(image.getRGB(0, 0));
 		convertToBufferedImage(convertToGrayScaleArray(image));
