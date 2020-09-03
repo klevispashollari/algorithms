@@ -50,10 +50,10 @@ public class KnapsackProblem implements Problem {
 
 	public static void main(String[] args) throws NoSolutionException {
 		// we take the same instance of the problem displayed in the image
-		Item[] items = { new Item("Elt1", 4, 12), new Item("Elt2", 2, 10), new Item("Elt3", 2, 20),
-				new Item("Elt4", 1, 10), new Item("Elt5", 10, 40) };
+		Item[] items = { new Item("g1", 10, 5), new Item("g2", 8, 3), new Item("g3", 5, 3),
+				new Item("g4", 6, 2) };
 
-		KnapsackProblem knapsack = new KnapsackProblem(items, 19);
+		KnapsackProblem knapsack = new KnapsackProblem(items, 11);
 		knapsack.display();
 		Solution solution = knapsack.createNewSolution();
 		solution.display();
