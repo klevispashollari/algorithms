@@ -5,11 +5,11 @@ import java.util.List;
 import knapsack.model.Solution;
 import knapsack.operators.FitnessEvaluator;
 
-public class KnapsackFitnessEvaluator implements FitnessEvaluator{
+public class KnapsackFitnessEvaluator implements FitnessEvaluator<KnapsackSolution>{
 
 	@Override
-	public void evaluate(List<Solution> population) {
-		// TODO Auto-generated method stub
+	public void evaluate(List<KnapsackSolution> population) {
+		population.stream().map(KnapsackSolution::calculateFitness);
 		
 	}
 

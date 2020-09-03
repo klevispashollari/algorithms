@@ -6,6 +6,7 @@ import knapsack.model.Solution;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class KnapsackProblem implements Problem {
 
@@ -45,17 +46,24 @@ public class KnapsackProblem implements Problem {
 	}
 
 	public Solution createNewSolution() throws NoSolutionException {
-		return new KnapsackSolution(this).solve();
+		return new KnapsackSolution(this,4);
 	}
+
+
 
 	public static void main(String[] args) throws NoSolutionException {
 		// we take the same instance of the problem displayed in the image
-		Item[] items = { new Item("g1", 10, 5), new Item("g2", 8, 3), new Item("g3", 5, 3),
-				new Item("g4", 6, 2) };
+		Item[] items = { new Item("g1", 10, 5),
+				         new Item("g2", 8, 3),
+				         new Item("g4", 6, 2),
+				         new Item("g1", 4, 3)
+		               };
 
-		KnapsackProblem knapsack = new KnapsackProblem(items, 11);
+		KnapsackProblem knapsack = new KnapsackProblem(items, 8);
 		knapsack.display();
-		Solution solution = knapsack.createNewSolution();
-		solution.display();
+        knapsack.createNewSolution();
+//		solution.display();
+
+
 	}
 }

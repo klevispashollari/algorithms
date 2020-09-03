@@ -4,7 +4,6 @@ import java.util.List;
 
 import knapsack.model.Solution;
 
-public interface EvolutionaryOperator {
-	public List<Solution> evolvePopulation(List<Solution> population) 
-			throws EvolutionException;
+public interface EvolutionaryOperator<T extends Solution> {
+	public List<T> evolvePopulation(List<T> population) throws EvolutionException;
 }

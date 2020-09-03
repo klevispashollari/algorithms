@@ -15,7 +15,7 @@ public class Driver {
 	public static double mutatProb;
 
 	public static void main(String[] args) {
-		readInit("C:\\Users\\kpashollari\\eclipse-workspace\\akademy\\algorithm\\src\\knapsack\\problems\\init.txt");
+		readInit("C:\\Users\\gledi\\git\\my-projects\\algorithms\\src\\knapsack\\problems\\init.txt");
 		KnapSackGA knapsack = new KnapSackGA(noItems, value, weight, knapsackSize, populationSize, maxGenerations,
 				crossProb, mutatProb);
 	}
