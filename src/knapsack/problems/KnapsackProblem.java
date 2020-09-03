@@ -1,9 +1,13 @@
 package knapsack.problems;
 
+import knapsack.model.NoSolutionException;
+import knapsack.model.Problem;
+import knapsack.model.Solution;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnapsackProblem {
+public class KnapsackProblem implements Problem {
 
 	private Item[] items;
 	private int capacity;
@@ -40,52 +44,18 @@ public class KnapsackProblem {
 		}
 	}
 
-	public KnapsackSolution createNewSolution() {
-		int NB_ITEMS = items.length;
-		// we use a matrix to store the max value at each n-th item
-		int[][] matrix = new int[NB_ITEMS + 1][capacity + 1];
-
-		// first line is initialized to 0
-		for (int i = 0; i <= capacity; i++)
-			matrix[0][i] = 0;
-
-		// we iterate on items
-		for (int i = 1; i <= NB_ITEMS; i++) {
-			// we iterate on each capacity
-			for (int j = 0; j <= capacity; j++) {
-				if (items[i - 1].getWeight() > j)
-					matrix[i][j] = matrix[i - 1][j];
-				else
-					// we maximize value at this rank in the matrix
-					matrix[i][j] = Math.max(matrix[i - 1][j],
-							matrix[i - 1][j - items[i - 1].getWeight()] + items[i - 1].getValue());
-			}
-		}
-
-		int res = matrix[NB_ITEMS][capacity];
-		int w = capacity;
-		List<Item> itemsSolution = new ArrayList<>();
-
-		for (int i = NB_ITEMS; i > 0 && res > 0; i--) {
-			if (res != matrix[i - 1][w]) {
-				itemsSolution.add(items[i - 1]);
-				// we remove items value and weight
-				res -= items[i - 1].getValue();
-				w -= items[i - 1].getWeight();
-			}
-		}
-
-		return new KnapsackSolution(itemsSolution, matrix[NB_ITEMS][capacity]);
+	public Solution createNewSolution() throws NoSolutionException {
+		return new KnapsackSolution(this).solve();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NoSolutionException {
 		// we take the same instance of the problem displayed in the image
-		Item[] items = { new Item("Elt1", 4, 12), new Item("Elt2", 2, 1), new Item("Elt3", 2, 2),
-				new Item("Elt4", 1, 1), new Item("Elt5", 10, 4) };
+		Item[] items = { new Item("Elt1", 4, 12), new Item("Elt2", 2, 10), new Item("Elt3", 2, 20),
+				new Item("Elt4", 1, 10), new Item("Elt5", 10, 40) };
 
-		KnapsackProblem knapsack = new KnapsackProblem(items, 15);
+		KnapsackProblem knapsack = new KnapsackProblem(items, 19);
 		knapsack.display();
-		KnapsackSolution solution = knapsack.createNewSolution();
+		Solution solution = knapsack.createNewSolution();
 		solution.display();
 	}
 }
