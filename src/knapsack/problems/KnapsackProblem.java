@@ -4,58 +4,83 @@ import knapsack.model.NoSolutionException;
 import knapsack.model.Problem;
 import knapsack.model.Solution;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 public class KnapsackProblem implements Problem {
 
-	private Item[] items;
-	private int capacity;
+    private static int countGenerator = 0;
+    private Item[] items;
+    private int capacity;
 
-	public Item[] getItems() {
-		return items;
-	}
+    public KnapsackProblem(Item[] items, int capacity) {
+        super();
+        this.items = items;
+        this.capacity = capacity;
+    }
 
-	public void setItems(Item[] items) {
-		this.items = items;
-	}
+    public Item[] getItems() {
+        return items;
+    }
 
-	public int getCapacity() {
-		return capacity;
-	}
+    public void setItems(Item[] items) {
+        this.items = items;
+    }
 
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
+    public int getCapacity() {
+        return capacity;
+    }
 
-	public KnapsackProblem(Item[] items, int capacity) {
-		super();
-		this.items = items;
-		this.capacity = capacity;
-	}
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
 
-	public void display() {
-		System.out.println("Knapsack problem");
-		System.out.println("Capacity:" + capacity);
-		System.out.println("Items :");
+    public int getItemsLength() {
+        return this.items.length;
+    }
 
-		for (Item item : items) {
-			System.out.println("- " + item.toString());
+    public void display() {
+        System.out.println("Knapsack problem");
+        System.out.println("Capacity:" + capacity);
+        System.out.println("Items :");
+        for (Item item : items) {
+            System.out.println("- " + item.toString());
+        }
+    }
+
+    // we create a new solution completely random recursively ( if it fails to satisfy the capacity requirements we manually
+    // adjust the weight to become lower iteratively )
+    public Solution createNewSolution() throws NoSolutionException {
+        int[] state = new int[items.length];
+        Random rand = new Random(System.currentTimeMillis());
+        for (int i = 0; i < items.length; i++) {
+            state[i] = rand.nextInt(2);
+        }
+		if (countGenerator > 10) {
+			for (int i = 0; i < items.length; i++) {
+				if (state[i] == 1) {
+					// try to substract
+					state[i] = 0;
+					if(Util.isEligible(items, state, capacity)){
+						KnapsackSolution solution = new KnapsackSolution(this);
+						solution.setBackPackState(state);
+						solution.setValue(Util.calculateValue(items, state));
+						countGenerator = 0;
+						return solution;
+					}
+				}
+			}
 		}
-	}
+        if (Util.isEligible(items, state, capacity)) {
+            KnapsackSolution solution = new KnapsackSolution(this);
+            solution.setBackPackState(state);
+			solution.setValue(Util.calculateValue(items, state));
+            countGenerator = 0;
+            return solution;
+        } else {
+            countGenerator++;
+            createNewSolution();
+        }
+        return new KnapsackSolution(this);
+    }
 
-	public Solution createNewSolution() throws NoSolutionException {
-		return new KnapsackSolution(this).solve();
-	}
-
-	public static void main(String[] args) throws NoSolutionException {
-		// we take the same instance of the problem displayed in the image
-		Item[] items = { new Item("g1", 10, 5), new Item("g2", 8, 3), new Item("g3", 5, 3),
-				new Item("g4", 6, 2) };
-
-		KnapsackProblem knapsack = new KnapsackProblem(items, 11);
-		knapsack.display();
-		Solution solution = knapsack.createNewSolution();
-		solution.display();
-	}
 }

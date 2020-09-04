@@ -7,15 +7,7 @@ public abstract class Solution {
 
     public Solution(Problem problem) {
         this.problem = problem;
-
     }
-
-    public Solution(Solution toCopy) {
-        this.problem = toCopy.getProblem();
-        this.fitness = toCopy.getFitness();
-    }
-
-    public abstract void display();
 
     public double getFitness() {
         return fitness;
@@ -27,5 +19,13 @@ public abstract class Solution {
 
     public Problem getProblem() {
         return problem;
+    }
+
+    @Override
+    public String toString() {
+        return "Solution{" +
+                "problem=" + problem +
+                ", fitness=" + fitness +
+                '}';
     }
 }
