@@ -14,6 +14,10 @@ public abstract class AbstractMorseToken {
         return codes;
     }
 
+    public void setCodes(List<String> codes) {
+        this.codes = codes;
+    }
+
     public abstract String toBinaryString();
 
 }
