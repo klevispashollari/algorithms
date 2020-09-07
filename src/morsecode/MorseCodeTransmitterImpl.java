@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class MorseCodeTransmitterImpl implements MorseCodeTransmitter {
 
+    // seven 0 that will be added between two words;
     private static final String WORDS_SEPARATOR="0000000";
 
     @Override
@@ -17,6 +18,13 @@ public class MorseCodeTransmitterImpl implements MorseCodeTransmitter {
     public List<AbstractMorseToken> convertBinaryToMorseCodes(String binary) {
         return Arrays.stream(binary.split(WORDS_SEPARATOR)).map(this::splitWord).collect(Collectors.toList());
     }
+
+    /**
+     * Takes a word string represented as binary format and splits it to every morse chars
+     * than map binary to mors code and create an MorseToken from each character
+     * @param word Binary String to be converted to AbstractMorseToken
+     * @return AbstractMorseToken
+     */
     private AbstractMorseToken splitWord(String word){
         AbstractMorseToken morseToken = new MorseToken();
         String[] chars = word.split(MorseToken.CHAR_SEPARATOR);
@@ -27,6 +35,11 @@ public class MorseCodeTransmitterImpl implements MorseCodeTransmitter {
         return morseToken;
     }
 
+    /**
+     * convert binary string to morse character "." or "-"
+     * @param binaryChar must be an 1 or 111
+     * @return morse character
+     */
     private String binaryCharToMors(String binaryChar) {
         if (binaryChar.equals("1")) {
             return ".";
