@@ -26,6 +26,11 @@ public class MorseCodeTranslatorTest {
          morseCodeTranslator = new MorseCodeTranslatorImpl();
     }
 
+    /**
+     * teston metoden encode te morseTranslatorit. merr nga file testToMorse.txt cdo fjale te fjalise(normale)
+     * e encodon ne kod mors dhe e teston a eshte i njejte me rreshtin pasardhes ( qe eshte kodi mors
+     * si pritet te jete vlera e enkoduar e stringes).
+     */
     @Test
     public void testEncode(){
         for (int i = 0; i <txtFileLines.size() ; i+=2) {
@@ -38,6 +43,10 @@ public class MorseCodeTranslatorTest {
         }
     }
 
+    /**
+     * encodon mesazhin, pastaj i ben ben decode dhe e krahason nese vlera e bere decode eshte e 
+     * njejte me rreshtin e pare. Kjo per cdo rresht te fjalive normale.
+     */
     @Test
     public void testDecode(){
         for (int i = 0; i <txtFileLines.size() ; i+=2) {

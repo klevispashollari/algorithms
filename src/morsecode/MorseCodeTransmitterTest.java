@@ -31,6 +31,10 @@ public class MorseCodeTransmitterTest {
         morseCodeTranslator = new MorseCodeTranslatorImpl();
     }
 
+    /**
+     * merr fjaline anglisht e kthen ne morse, kodin mors e konverton ne binare dhe teston nese 
+     * konvertimi eshte i barabarte me rreshtin pasardhes apo jo. Kjo per cdo rast
+     */
     @Test
     public void convertToBinaryTest(){
         for (int i = 0; i <txtFileLines.size() ; i+=2) {
@@ -40,6 +44,11 @@ public class MorseCodeTransmitterTest {
         }
     }
 
+    /**
+     * merr fjaline me kod mors nga textToMorse. Konverton ne text morse kodin binare ne filen
+     * TextToBinare. dhe teston nese ky kod mors eshte i njejte me kodin mors qe u mor nga textToMorse.
+     * 
+     */
     @Test
     public void convertBinaryToMorseCodeTest(){
         for (int i = 1; i <txtFileLines.size() ; i+=2) {

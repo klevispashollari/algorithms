@@ -18,7 +18,8 @@ public class MorseToken extends AbstractMorseToken {
     }
 
     /**
-     * convert all morse codes to binary and adds between them a "000" string;
+	 * ndermjet cdo karakteri te fjales shtojme tre zero.
+	 * Nese fjala eshte '.' ',' ose '!' shtojme 7 ne vend te tre. 4 zerot e tjetra shtohen te metoda me poshte.
      * @return
      */
     @Override
