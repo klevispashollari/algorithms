@@ -15,6 +15,7 @@ public interface MorseCodeTranslator {
             "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----.",
             "-----", "--..--", ".-.-.-", "..--.." };
 
+
     /**
      * Converts a given character to a morse String.
      * @param c the character to be converted.

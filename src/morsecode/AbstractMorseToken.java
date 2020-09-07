@@ -14,6 +14,10 @@ public abstract class AbstractMorseToken {
         return codes;
     }
 
+    public boolean addCode(String code) {
+        return codes.add(code);
+    }
+
     public void setCodes(List<String> codes) {
         this.codes = codes;
     }

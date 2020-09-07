@@ -31,6 +31,7 @@ public class MorseCodeTranslatorTest {
         for (int i = 0; i <txtFileLines.size() ; i+=2) {
             List<TextToken> textTokens = morseCodeTranslator.tokenizeMessage(txtFileLines.get(i));
             List<AbstractMorseToken> tokens = morseCodeTranslator.encodeMessage(textTokens);
+            System.out.println(tokens);
             List<String> textMorseEncoded = tokens.stream().map(AbstractMorseToken::getCodes).flatMap(List::stream).collect(Collectors.toList());
             List<String> textMorse = splitString(txtFileLines.get(i+1));
             Assert.assertEquals(textMorse,textMorseEncoded);
@@ -44,7 +45,7 @@ public class MorseCodeTranslatorTest {
             List<AbstractMorseToken> tokens = morseCodeTranslator.encodeMessage(textTokens);
             List<TextToken> textTokensDecode = morseCodeTranslator.decodeMessage(tokens);
             String decodeText = morseCodeTranslator.textTokenListToString(textTokensDecode);
-            Assert.assertEquals(decodeText,txtFileLines.get(i).toLowerCase());
+            Assert.assertEquals(txtFileLines.get(i).toLowerCase(),decodeText);
         }
     }
 
