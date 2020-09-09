@@ -1,5 +1,12 @@
 package scaffold;
 
+
+import scaffold.agBioinformatik.aminoacid.AminoAcid;
+import scaffold.agBioinformatik.aufgabe1.BioBasicsParser;
+import scaffold.agBioinformatik.aufgabe2.GenomeDownloader;
+import scaffold.agBioinformatik.aufgabe2.GenomeParser;
+import scaffold.agBioinformatik.aufgabe2.GenomeParserOO;
+
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -9,67 +16,67 @@ import java.util.Map;
 
 public class Main {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		try {
+        try {
 
-			/* Teil A */
+            /* Teil A */
 
-			BioBasicsParser bioBasicsParser = new BioBasicsParser();
+            BioBasicsParser bioBasicsParser = new BioBasicsParser();
 
-			Path file = Paths.get("/home/ProgPrak2020/genom.txt");
+            Path file = Paths.get("/home/ProgPrak2020/genom.txt");
 
-			bioBasicsParser.loadEntireFile(file);
-			bioBasicsParser.loadFileBuffered(file);
+            bioBasicsParser.loadEntireFile(file);
+            bioBasicsParser.loadFileBuffered(file);
 
-			List<String> info = bioBasicsParser.getInfoFor("Viral", 80, true);
-			System.out.println(info);
+            List<String> info = bioBasicsParser.getInfoFor("Viral", 80, true);
+            System.out.println(info);
 
-			bioBasicsParser.loadWikiPage(new URL("https://de.wikipedia.org/wiki/Genom"));
-			System.out.println(bioBasicsParser.getInfoFor("Viral", 80, false));
+            bioBasicsParser.loadWikiPage(new URL("https://de.wikipedia.org/wiki/Genom"));
+            System.out.println(bioBasicsParser.getInfoFor("Viral", 80, false));
 
-			/* Teil B1 */
+            /* Teil B1 */
 
-			GenomeDownloader genomeDownloader = new GenomeDownloader();
+            GenomeDownloader genomeDownloader = new GenomeDownloader();
 
-			String id = genomeDownloader.parseGenomeId("escherichia", "coli");
+            String id = genomeDownloader.parseGenomeId("escherichia", "coli");
+            System.out.println("ID:" + id);
+            List<String> sequenceIds = genomeDownloader.parseSequenceId(id);
+            Map<String, String> res = genomeDownloader.getSequence(sequenceIds.get(0));
 
-			List<String> sequenceIds = genomeDownloader.parseSequenceId(id);
+            //  Teil B2
 
-			Map<String, String> res = genomeDownloader.getSequence(sequenceIds.get(0));
+            GenomeParser genomeParser = new GenomeParser(res.get("seq"));
 
-			/* Teil B2 */
+            String aminoAcid = genomeParser.getAminoAcid("AGC");
+            System.out.println(aminoAcid);
+            List<String> triplets = genomeParser.getCodon("X");
+            System.out.println(triplets);
 
-			GenomeParser genomeParser = new GenomeParser(res.get("seq"));
+            GenomeParserOO genomeParserOO = new GenomeParserOO(res.get("seq"));
 
-			String aminoAcid = genomeParser.getAminoAcid("AGC");
-			System.out.println(aminoAcid);
+            Serine s = (Serine) genomeParserOO.getAminoAcid("AGC");
+            System.out.println(s.getOneLetterName());
 
-			List<String> triplets = genomeParser.getCodon("X");
-			System.out.println(triplets);
+            List<String> codons = genomeParser.getCodons(res.get("seq"));
+            System.out.println(codons);
 
-			GenomeParserOO genomeParserOO = new GenomeParserOO(res.get("seq"));
+            List<AminoAcid> aminoAcids = genomeParserOO.getCodons(res.get("seq"));
+            System.out.println(aminoAcids);
 
-			Serine s = (Serine) genomeParserOO.getAminoAcid("AGC");
-			System.out.println(s.getOneLetterName());
+            //  Teil B3
 
-			List<String> codons = genomeParser.getCodons(res.get("seq"));
-			System.out.println(codons);
+            List<String> codingRegions = genomeParserOO.getCodingRegions(aminoAcids);
+            System.out.println(codingRegions);
 
-			List<AminoAcid> aminoAcids = genomeParserOO.getCodons(res.get("seq"));
-			System.out.println(aminoAcids);
+            System.out.println(genomeParserOO.getLengthDistribution(codingRegions, 15, 20));
 
-			/* Teil B3 */
 
-			List<String> codingRegions = genomeParserOO.getCodingRegions(aminoAcids);
-			System.out.println(codingRegions);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-			System.out.println(genomeParserOO.getLengthDistribution(codingRegions, 15, 20));
+    }
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
 
 }

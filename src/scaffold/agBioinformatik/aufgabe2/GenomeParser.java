@@ -1,4 +1,4 @@
-package scaffold_gled.agBioinformatik.aufgabe2;
+package scaffold.agBioinformatik.aufgabe2;
 
 import java.util.*;
 
