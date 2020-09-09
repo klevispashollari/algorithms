@@ -1,11 +1,11 @@
-package scaffold;
+package scaffold_gled;
 
 
-import scaffold.agBioinformatik.aminoacid.AminoAcid;
-import scaffold.agBioinformatik.aufgabe1.BioBasicsParser;
-import scaffold.agBioinformatik.aufgabe2.GenomeDownloader;
-import scaffold.agBioinformatik.aufgabe2.GenomeParser;
-import scaffold.agBioinformatik.aufgabe2.GenomeParserOO;
+import scaffold_gled.agBioinformatik.aminoacid.AminoAcid;
+import scaffold_gled.agBioinformatik.aufgabe1.BioBasicsParser;
+import scaffold_gled.agBioinformatik.aufgabe2.GenomeDownloader;
+import scaffold_gled.agBioinformatik.aufgabe2.GenomeParser;
+import scaffold_gled.agBioinformatik.aufgabe2.GenomeParserOO;
 
 import java.io.IOException;
 import java.net.URL;

@@ -1,6 +1,6 @@
-package scaffold.agBioinformatik.aufgabe2;
+package scaffold_gled.agBioinformatik.aufgabe2;
 
-import scaffold.agBioinformatik.aminoacid.AminoAcid;
+import scaffold_gled.agBioinformatik.aminoacid.AminoAcid;
 
 import java.util.*;
 import java.util.stream.Collectors;

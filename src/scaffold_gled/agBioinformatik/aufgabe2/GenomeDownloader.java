@@ -1,7 +1,7 @@
-package scaffold.agBioinformatik.aufgabe2;
+package scaffold_gled.agBioinformatik.aufgabe2;
 
 
-import scaffold.agBioinformatik.aufgabe1.BioBasicsParser;
+import scaffold_gled.agBioinformatik.aufgabe1.BioBasicsParser;
 
 import java.io.BufferedReader;
 import java.io.IOException;

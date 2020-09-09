@@ -1,4 +1,4 @@
-package scaffold.agBioinformatik.aminoacid;
+package scaffold_gled.agBioinformatik.aminoacid;
 
 public abstract class AminoAcid {
 
