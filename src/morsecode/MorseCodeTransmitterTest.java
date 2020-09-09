@@ -45,9 +45,9 @@ public class MorseCodeTransmitterTest {
     }
 
     /**
-     * merr fjaline me kod mors nga textToMorse. Konverton ne text morse kodin binare ne filen
-     * TextToBinare. dhe teston nese ky kod mors eshte i njejte me kodin mors qe u mor nga textToMorse.
-     * 
+	 * marim kodin mors nga textToMorse. marim kodin binar dhe e kthejme ne kod mors.
+     *  testojme nese kodi mors qe u konvertua nga binari eshte i barabarte me kodin mors
+     *   qe morem ne fillim
      */
     @Test
     public void convertBinaryToMorseCodeTest(){

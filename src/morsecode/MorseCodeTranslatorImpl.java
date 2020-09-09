@@ -52,6 +52,7 @@ public class MorseCodeTranslatorImpl implements MorseCodeTranslator {
      */
     @Override
     public List<TextToken> tokenizeMessage(String message) {
+    	// \\s+ --> regular expression = " "
         String[] words = message.split("\\s+");
         return Arrays.stream(words).map(TextToken::new).collect(Collectors.toList());
     }

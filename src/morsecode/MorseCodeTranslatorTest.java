@@ -27,7 +27,8 @@ public class MorseCodeTranslatorTest {
     }
 
     /**
-     * teston metoden encode te morseTranslatorit. merr nga file testToMorse.txt cdo fjale te fjalise(normale)
+     * teston metoden encode te morseTranslatorit. merr nga file testToMorse.txt 
+     * cdo fjale te fjalise(normale)
      * e encodon ne kod mors dhe e teston a eshte i njejte me rreshtin pasardhes ( qe eshte kodi mors
      * si pritet te jete vlera e enkoduar e stringes).
      */
