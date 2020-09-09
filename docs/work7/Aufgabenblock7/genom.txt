@@ -1,0 +1,85 @@
+Genom
+
+Das Genom, auch Erbgut eines Lebewesens oder eines Virus, ist die Gesamtheit der materiellen Träger der vererbbaren Informationen einer Zelle
+oder eines Viruspartikels: Chromosomen, Desoxyribonukleinsäure (DNS = DNA) oder Ribonukleinsäure (RNS = RNA) bei RNA-Viren, bei denen RNA
+anstelle von DNA als Informationsträger dient. Im abstrakten Sinn versteht man darunter auch die Gesamtheit der vererbbaren Informationen
+(Gene) eines Individuums.
+
+Die Bezeichnung Genom wurde, nach der durch Thomas Hunt Morgan gelungenen Verknüpfung der Chromosomentheorie der Vererbung mit der durch Wilhelm
+Johannsen aufgestellten Hypothese von Genen als Erbeinheiten, 1920 von Hans Winkler geprägt. Das Teilgebiet der Genetik, das sich mit der
+Erforschung des Aufbaus von Genomen und der Wechselwirkungen zwischen Genen befasst, wird als Genomik (englisch genomics) bezeichnet.
+
+Grundlagen
+
+Die für die Vererbung von Eigenschaften und Merkmalen erforderliche und auf der Ebene der Zellen und der Individuen weitergegebene Information ist
+in der DNA enthalten, und zwar in der Sequenz (Abfolge) der DNA-Basen Adenin (A), Guanin (G), Cytosin (C) und Thymin (T). Ribonukleinsäuren
+verwenden an Stelle des Thymins die Base Uracil (U). Jeweils drei aufeinanderfolgende Basen bedeuten nach der Regel des genetischen Codes
+eine Aminosäure.
+
+Man unterscheidet codierende und nichtcodierende Abschnitte der DNA. Nach Maßgabe der Basensequenz der codierenden Abschnitte (Gene) werden im
+Zuge der Genexpression aus Aminosäuren Proteine gebildet. Aber auch nichtcodierende Bereiche können wichtige Funktionen aufweisen, so
+etwa bei der Genregulation. Außerdem gibt es die sogenannten Pseudogene: durch Mutationen funktionslos gewordene und vom Organismus nicht
+mehr abgelesene Gene.
+
+Die meisten Organismen besitzen neben der chromosomalen DNA des Zellkerns (deswegen auch Karyom genannt) weiteres genetisches Material in anderen
+Zellteilen. Bei diesen Eukaryoten (Tiere, Pflanzen, Pilze und Protisten) haben die Mitochondrien, bei Pflanzen und Algen des Weiteren die
+Plastiden, eigene kleine Genome. Prokaryoten (Bakterien und Archaeen) enthalten vielfach zusätzliche, relativ kurze, in sich geschlossene
+DNA-Moleküle, die als Plasmide bezeichnet werden.
+
+Organisation von Genomen
+
+Eukaryoten
+
+Bei den Eukaryoten besteht das Kern-Genom (Karyom) aus mehreren bis zahlreichen strangförmigen Chromosomen. Die Anzahl der Chromosomen ist artspezifisch
+verschieden und kann zwischen zwei (beim Pferdespulwurm) und mehreren hundert (bei manchen Farnen) variieren. Außerdem ändert sich die
+Chromosomenzahl beim Wechsel der Kernphase (Meiose und Karyogamie). Charakteristisch für eukaryotische Genome ist weiterhin ein hoher Anteil an nichtcodierender
+DNA (beim Menschen etwa 95 %) und die Intron-Exon-Struktur der Gene.
+
+Prokaryoten
+
+Bei den Prokaryoten liegt die DNA als langes, in sich geschlossenes Molekül vor. Daneben können kürzere, ebenfalls in sich geschlossene DNA-Moleküle,
+sogenannte Plasmide, in variabler Anzahl vorhanden sein. Diese können unabhängig von der Haupt-DNA vervielfältigt und an andere Prokaryotenzellen
+weitergegeben werden (Konjugation), auch über Artgrenzen hinweg. Sie enthalten in der Regel nur wenige Gene, die zum Beispiel Resistenzen gegen
+Antibiotika vermitteln.
+
+Prokaryotische Genome sind im Allgemeinen wesentlich kleiner als eukaryotische. Sie enthalten relativ geringe nichtcodierende Anteile (5–20 %) und auch
+nur wenige oder gar keine Introns.
+
+Organellen
+
+Die Genome der Mitochondrien und Plastiden sind wie prokaryotische Genome organisiert (vgl. Endosymbiontentheorie). Sie enthalten jedoch nur einen geringen
+Teil der für die Funktion dieser Organellen benötigten Gene, weshalb diese Organellen als „semi-autonom“ bezeichnet werden.
+
+Viren
+
+Virale Genome sind sehr klein, da in ihnen nur recht wenige Proteine codiert sind und die genetische Information zudem hochgradig verdichtet ist, indem
+etwa verschiedene Gene überlappen oder manche Abschnitte zugleich in beiden Leserichtungen als Gene fungieren können. Sie können aus DNA oder
+RNA bestehen, und diese können einzel- oder doppelsträngig sowie linear, zirkulär oder segmentiert vorliegen. Eine Besonderheit stellen die
+Retroviren dar, deren RNA-Genom mittels reverser Transkription in DNA „übersetzt“ und in das Wirtsgenom integriert werden kann. Die Eigenschaften der
+Genome der Viren sind wichtige Kriterien bei deren Einteilung (Virus-Taxonomie).
+
+Genomgrößen
+
+Als Genomgröße wird die in einem Genom vorhandene Menge an DNA bezeichnet. Bei Eukaryoten bezieht sich diese Angabe gewöhnlich auf den haploiden Chromosomensatz,
+dies wird auch als C-Wert bezeichnet. Es wird entweder die Anzahl der vorhandenen Basenpaare (bp) oder die Masse der DNA in der Einheit pg (Pikogramm)
+angegeben. 1 pg doppelsträngiger DNA besteht aus etwa 0,978·109 bp, also aus knapp einer Milliarde Basenpaaren. Üblich sind auch die Bezeichnungen
+Kilo-Basenpaar (kbp oder kb) für 1.000 Basenpaare und Mega-Basenpaar (Mbp oder Mb) für eine Million Basenpaare.
+
+Nach neueren Untersuchungen besitzt der Südamerikanische Lungenfisch (Lepidosiren paradoxa) mit 80 pg (7,84 × 1010 bp) das größte bisher bekannte tierische Genom.
+ Ältere, aber wohl ungenauere Untersuchungen zeigen mit etwa 133 pg noch größere Genome, die ebenfalls bei Lungenfischen, allerdings bei der afrikanischen
+Art Äthiopischer Lungenfisch (Protopterus aethiopicus) gefunden wurden. Mit 0,04 pg (weniger als 50 Millionen Basenpaare) besitzt das zum primitiven Tierstamm
+Placozoa gehörende, auf Algen lebende, etwa 2 mm große, wenig differenzierte Trichoplax adhaerens das kleinste bisher bekannte tierische Genom. Die Zahl
+der Basenpaare des Darmbakteriums Escherichia coli ist nur um einen Faktor 10 kleiner. Das kleinste bisher quantifizierte bakterielle Genom besitzt der
+Blattfloh-Endosymbiont Carsonella ruddii: Sein zirkuläres DNA-Molekül enthält nur knapp 160.000 Basenpaare, in denen sämtliche Informationen gespeichert sind,
+die er zum Leben braucht.
+
+Die DNA einer einzelnen menschlichen Zelle ist aneinandergereiht etwa 1,80 m lang. Ein Basenpaar auf einem DNA-Strang hat theoretisch einen Informationsgehalt
+von 2 bit, da es 22 = 4 Zustände (A/T/G/C) annehmen kann. Mit etwa 3,27 Milliarden Basenpaaren hätte das Genom des Menschen demnach einen maximal möglichen
+Informationsgehalt von 6,54 Milliarden bit oder 780 MiB. Der tatsächliche Informationsgehalt liegt vermutlich deutlich darunter, da große Teile der DNA
+nichtcodierende Sequenzen aufweisen, die allerdings zumindest teilweise regulatorische Funktionen haben.
+
+Ein Vergleich der Genomgröße mit der Komplexität und dem Organisationsgrad des Organismus ergibt keinen klaren Zusammenhang. So haben Schwanzlurche größere
+Genome als Reptilien, Vögel und Säugetiere. Lungenfische und Knorpelfische haben größere Genome als Echte Knochenfische, und innerhalb von Taxa wie den
+Blütenpflanzen oder Protozoen variiert die Genomgröße in hohem Maß. Dies wird als „C-Wert-Paradoxon“ bezeichnet. Die größte DNA-Menge weisen einfache Eukaryoten
+wie einige Amöben sowie die Urfarne mit rund einer Billion Basenpaaren auf. Diese Arten enthalten einzelne Gene als tausendfache Kopien und lange nicht
+proteincodierende Abschnitte.
