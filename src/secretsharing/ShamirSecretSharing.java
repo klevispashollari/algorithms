@@ -39,6 +39,7 @@ public class ShamirSecretSharing {
 		// use p = 2^2048 + 981
 		this.p = BigInteger.ONE.shiftLeft(2048).add(BigInteger.valueOf(981));
 	}
+	
 
 	/**
 	 * Shares the secret into n parts.
@@ -49,10 +50,14 @@ public class ShamirSecretSharing {
 	 * @return An array of the n shares.
 	 */
 	public ShamirShare[] share(BigInteger secret) {
-
-		// TODO: implement this
-
-		return null;
+		ShamirShare[] shares = new ShamirShare[t];
+		BigInteger a[] = new BigInteger[t];
+		for(int i = 1; i< t; i++) {
+			a[i] = new BigInteger (p.bitLength (), rng);
+			shares[i] = new ShamirShare(BigInteger.valueOf(i), horner(BigInteger.valueOf(i),a).mod(p));
+		}
+		return shares;
+		
 	}
 
 	/**
@@ -66,10 +71,14 @@ public class ShamirSecretSharing {
 	 * @return value of the polynomial at point x
 	 */
 	private BigInteger horner(BigInteger x, BigInteger[] a) {
+		BigInteger sum = new BigInteger("0");
 		
-		// TODO: implement this
-
-		return null;
+		for(int i = a.length-1;  i>=1; i--) {
+			sum = (sum.add(a[i])).multiply(x.pow(i));
+		}
+		sum = sum.add(a[0]);
+		
+		return sum;
 	}
 
 	/**
@@ -99,5 +108,5 @@ public class ShamirSecretSharing {
 	private int n;
 	private SecureRandom rng;
 	private BigInteger p;
-
+	
 }
