@@ -55,8 +55,8 @@ public class Main {
 
             GenomeParserOO genomeParserOO = new GenomeParserOO(res.get("seq"));
 
-            Serine s = (Serine) genomeParserOO.getAminoAcid("AGC");
-            System.out.println(s.getOneLetterName());
+//            Serine s = (Serine) genomeParserOO.getAminoAcid("AGC");
+//            System.out.println(s.getOneLetterName());
 
             List<String> codons = genomeParser.getCodons(res.get("seq"));
             System.out.println(codons);

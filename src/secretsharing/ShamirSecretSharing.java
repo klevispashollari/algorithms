@@ -50,14 +50,15 @@ public class ShamirSecretSharing {
 	 * @return An array of the n shares.
 	 */
 	public ShamirShare[] share(BigInteger secret) {
-		ShamirShare[] shares = new ShamirShare[t];
+		ShamirShare[] shares = new ShamirShare[n];
 		BigInteger a[] = new BigInteger[t];
-		for(int i = 1; i< t; i++) {
-			a[i] = new BigInteger (p.bitLength (), rng);
+		for(int i=0;i<n;i++){
+			for(int j = 1; j<t; j++) {
+				a[j] = new BigInteger(p.bitLength(), rng);
+			}
 			shares[i] = new ShamirShare(BigInteger.valueOf(i), horner(BigInteger.valueOf(i),a).mod(p));
 		}
 		return shares;
-		
 	}
 
 	/**
@@ -72,12 +73,9 @@ public class ShamirSecretSharing {
 	 */
 	private BigInteger horner(BigInteger x, BigInteger[] a) {
 		BigInteger sum = new BigInteger("0");
-		
-		for(int i = a.length-1;  i>=1; i--) {
-			sum = (sum.add(a[i])).multiply(x.pow(i));
+		for(int i=0; i<a.length; i++){
+			sum = sum.add(a[i].multiply(x.pow(i)));
 		}
-		sum = sum.add(a[0]);
-		
 		return sum;
 	}
 
@@ -90,10 +88,19 @@ public class ShamirSecretSharing {
 	 * @return The reconstructed secret.
 	 */
 	public BigInteger combine(ShamirShare[] shares) {
+		// find k from [t,n]
+		int k = rng.nextInt(n-t)+t;
+		BigInteger result = new BigInteger("0");
+		for(int i=0;i<k;i++){
+			BigInteger interpolation = new BigInteger("1");
+			for(int j=1;j<k;j++){
+				BigInteger function = shares[j].x.negate().multiply(shares[i].x.subtract(shares[j].x).modInverse(p)).mod(p);
+				interpolation = interpolation.multiply(function);
+			}
+			result = result.add(interpolation.mod(p));
+		}
 
-		// TODO: implement this
-
-		return null;
+		return result;
 	}
 
 	public int getT() {

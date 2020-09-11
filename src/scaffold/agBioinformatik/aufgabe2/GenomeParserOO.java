@@ -72,10 +72,8 @@ public class GenomeParserOO {
 
         Map<String, String> tmp = new LinkedHashMap<>();
         collect.forEach(t -> {
-           int s = codingRegions.stream()
-                   .filter(cr -> cr.length() >= t.get(0) && cr.length() < t.get(1))
-                   .collect(Collectors.toList())
-                   .size();
+           int s = (int) codingRegions.stream()
+                   .filter(cr -> cr.length() >= t.get(0) && cr.length() < t.get(1)).count();
            tmp.put(
                    String.format("[%s %s)", t.get(0), t.get(1)),
                    String.join("", Collections.nCopies(s, "*"))
