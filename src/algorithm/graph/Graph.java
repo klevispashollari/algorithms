@@ -15,6 +15,8 @@ public interface Graph {
      */
     public void addVertex (Integer v);
     
+    public void test();
+    
     /**
      * Adds a new edge to the graph
      * @param v First Id of incident vertex
