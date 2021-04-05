@@ -12,6 +12,10 @@ public class Vertex {
 		this.value = value;
 	}
 
+	public void testSvn()
+	{
+		
+	}
 	public Vertex(Integer value) {
 		super();
 		this.value = value;
